@@ -113,6 +113,7 @@ export default function ColorPicker() {
       document.body.appendChild(el);
       el.select();
       document.body.removeChild(el);
+      console.log("Error:", e);
     }
   };
 
