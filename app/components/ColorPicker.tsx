@@ -162,14 +162,6 @@ export default function ColorPicker() {
               </button>
             </div>
           </div>
-
-          <div className="flex flex-col items-end">
-            <div className="text-sm text-zinc-600 dark:text-zinc-400">Preview</div>
-            <div
-              className="mt-1 h-12 w-24 rounded border border-gray-200 shadow-sm dark:border-zinc-700"
-              style={{ background: color }}
-            />
-          </div>
         </div>
       </div>
 
