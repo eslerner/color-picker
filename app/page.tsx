@@ -17,8 +17,9 @@ export default function Home() {
             Color Picker
           </h1>
           <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            A handly little tool written with React and Next.js to help you pick
-            colors and get their HEX, RGB, HSL, and CMYK values.
+            A handy little tool written with React and Next.js to help you pick
+            colors and get their HEX, RGB, HSL, and CMYK values as well as some
+            secondary colors that may go well with the primary.
           </p>
         </div>
         <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
