@@ -19,12 +19,14 @@ export default function Home() {
           </h1>
           <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
             A handy little tool written with React and Next.js to help you pick
-            colors and get their HEX and RGB values.
+            colors and get their HEX and RGB values, as well as some complementary
+            colors that may go good with your primary color. 
           </p>
+          <br></br>
         </div>
 
         <ColorPicker />
-
+        <br></br>
         <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
           <a
             className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
