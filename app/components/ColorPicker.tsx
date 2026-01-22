@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 function normalizeHex(hex: string) {
   let h = hex.replace(/[^0-9a-fA-F]/g, '');
@@ -93,8 +93,11 @@ function hslToHex(h: number, s: number, l: number) {
   const { r, g, b } = hslToRgb(h, s, l);
   return rgbToHex(r, g, b);
 }
+interface ColorPickerProps {
+  onChange: (colors: string[]) => void;
+}
 
-export default function ColorPicker() {
+export default function ColorPicker({ onChange }: ColorPickerProps) {
   const [color, setColor] = useState('#4f46e5');
   const rgb = hexToRgb(color);
   const hsl = rgbToHsl(rgb.r, rgb.g, rgb.b);
@@ -115,19 +118,23 @@ export default function ColorPicker() {
     ];
   })();
 
+  useEffect(() => {
+    const colorPalette = suggested.map(s => s.color);
+    onChange(colorPalette);
+  }, [color, onChange, suggested]);
+
   const onColorChange = (value: string) => setColor(normalizeHex(value));
 
   const copy = async (text: string) => {
     try {
       await navigator.clipboard.writeText(text);
     } catch (e) {
-      // fallback
+      console.log('Clipboard API not available, falling back to execCommand.', e);
       const el = document.createElement('textarea');
       el.value = text;
       document.body.appendChild(el);
       el.select();
       document.body.removeChild(el);
-      console.log('Error:', e);
     }
   };
 
@@ -140,7 +147,7 @@ export default function ColorPicker() {
             type="color"
             value={color}
             onChange={e => onColorChange(e.target.value)}
-            className="h-12 w-12 rounded-md border-none p-0"
+            className="h-12 w-12 rounded-md border-none p-0 cursor-pointer"
           />
           <div className="flex flex-col">
             <label className="text-sm text-zinc-600 dark:text-zinc-400">HEX</label>
