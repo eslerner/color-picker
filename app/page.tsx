@@ -1,5 +1,5 @@
-import Image from "next/image";
-import ColorPicker from "./components/ColorPicker";
+import Image from 'next/image';
+import ColorPicker from './components/ColorPicker';
 
 export default function Home() {
   return (
@@ -18,9 +18,9 @@ export default function Home() {
             Color Picker
           </h1>
           <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            A handy little tool written with React and Next.js to help you pick
-            colors and get their HEX and RGB values, as well as some complementary
-            colors that may go good with your primary color. 
+            A handy little tool written with React and Next.js to help you pick colors and get their
+            HEX and RGB values, as well as some complementary colors that may go good with your
+            primary color.
           </p>
           <br></br>
         </div>

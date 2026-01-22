@@ -1,13 +1,16 @@
-"use client";
+'use client';
 
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
 function normalizeHex(hex: string) {
-  let h = hex.replace(/[^0-9a-fA-F]/g, "");
+  let h = hex.replace(/[^0-9a-fA-F]/g, '');
   if (h.length === 3) {
-    h = h.split("").map((c) => c + c).join("");
+    h = h
+      .split('')
+      .map(c => c + c)
+      .join('');
   }
-  if (h.length !== 6) return "000000";
+  if (h.length !== 6) return '000000';
   return `#${h.toLowerCase()}`;
 }
 
@@ -20,18 +23,28 @@ function hexToRgb(hex: string) {
 }
 
 function rgbToHsl(r: number, g: number, b: number) {
-  r /= 255; g /= 255; b /= 255;
-  const max = Math.max(r, g, b), min = Math.min(r, g, b);
-  let h = 0, s = 0;
+  r /= 255;
+  g /= 255;
+  b /= 255;
+  const max = Math.max(r, g, b),
+    min = Math.min(r, g, b);
+  let h = 0,
+    s = 0;
   const l = (max + min) / 2;
 
   if (max !== min) {
     const d = max - min;
     s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
     switch (max) {
-      case r: h = (g - b) / d + (g < b ? 6 : 0); break;
-      case g: h = (b - r) / d + 2; break;
-      case b: h = (r - g) / d + 4; break;
+      case r:
+        h = (g - b) / d + (g < b ? 6 : 0);
+        break;
+      case g:
+        h = (b - r) / d + 2;
+        break;
+      case b:
+        h = (r - g) / d + 4;
+        break;
     }
     h /= 6;
   }
@@ -41,7 +54,8 @@ function rgbToHsl(r: number, g: number, b: number) {
 
 function hslToRgb(h: number, s: number, l: number) {
   h = ((h % 360) + 360) % 360;
-  s /= 100; l /= 100;
+  s /= 100;
+  l /= 100;
   if (s === 0) {
     const v = Math.round(l * 255);
     return { r: v, g: v, b: v };
@@ -49,17 +63,17 @@ function hslToRgb(h: number, s: number, l: number) {
   const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
   const p = 2 * l - q;
   const hk = h / 360;
-  const t2r = hk + 1/3;
+  const t2r = hk + 1 / 3;
   const t2g = hk;
-  const t2b = hk - 1/3;
+  const t2b = hk - 1 / 3;
 
   const conv = (t: number) => {
     let tt = t;
     if (tt < 0) tt += 1;
     if (tt > 1) tt -= 1;
-    if (tt < 1/6) return p + (q - p) * 6 * tt;
-    if (tt < 1/2) return q;
-    if (tt < 2/3) return p + (q - p) * (2/3 - tt) * 6;
+    if (tt < 1 / 6) return p + (q - p) * 6 * tt;
+    if (tt < 1 / 2) return q;
+    if (tt < 2 / 3) return p + (q - p) * (2 / 3 - tt) * 6;
     return p;
   };
 
@@ -81,7 +95,7 @@ function hslToHex(h: number, s: number, l: number) {
 }
 
 export default function ColorPicker() {
-  const [color, setColor] = useState("#4f46e5");
+  const [color, setColor] = useState('#4f46e5');
   const rgb = hexToRgb(color);
   const hsl = rgbToHsl(rgb.r, rgb.g, rgb.b);
 
@@ -113,7 +127,7 @@ export default function ColorPicker() {
       document.body.appendChild(el);
       el.select();
       document.body.removeChild(el);
-      console.log("Error:", e);
+      console.log('Error:', e);
     }
   };
 
@@ -125,7 +139,7 @@ export default function ColorPicker() {
             aria-label="Pick color"
             type="color"
             value={color}
-            onChange={(e) => onColorChange(e.target.value)}
+            onChange={e => onColorChange(e.target.value)}
             className="h-12 w-12 rounded-md border-none p-0"
           />
           <div className="flex flex-col">
@@ -134,7 +148,7 @@ export default function ColorPicker() {
               <input
                 className="w-36 rounded border border-gray-200 px-3 py-2 text-sm dark:bg-zinc-800 dark:border-zinc-700"
                 value={color}
-                onChange={(e) => onColorChange(e.target.value)}
+                onChange={e => onColorChange(e.target.value)}
               />
               <button
                 onClick={() => copy(color)}
@@ -173,7 +187,10 @@ export default function ColorPicker() {
             <div key={i} className="flex items-center gap-2">
               <button
                 title={`${s.label}: ${s.color}`}
-                onClick={() => { setColor(s.color); copy(s.color); }}
+                onClick={() => {
+                  setColor(s.color);
+                  copy(s.color);
+                }}
                 className="group flex cursor-pointer items-center gap-2"
               >
                 <div
