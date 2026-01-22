@@ -31,6 +31,18 @@ export default function Home() {
   const handleSaveClick = () => {
     if (activeColors.length === 0) return;
 
+    const normalized = activeColors.map(c => c.toLowerCase());
+    const exists = palettes.some(
+      p =>
+        p.colors.length === normalized.length &&
+        p.colors.every((c, i) => c.toLowerCase() === normalized[i])
+    );
+
+    if (exists) {
+      alert('This palette is already saved.');
+      return;
+    }
+
     const newEntry: Palette = {
       id: Date.now(),
       colors: [...activeColors],
