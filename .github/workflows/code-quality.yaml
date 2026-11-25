@@ -20,7 +20,7 @@ jobs:
         run: npm ci
 
       - name: Run ESLint
-        run: npx run lint
+        run: npm run lint
 
       - name: Run Prettier check
         run: npx prettier --check "**/*.{js,ts,tsx,json,css,md}"
